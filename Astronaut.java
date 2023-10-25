@@ -33,16 +33,6 @@ public Astronaut() {
 
     }
     public void doActions(Object mars){
-    /*
-    null: Started a mission!
-null: Thanks for this Mars number 1!
-null: I may have done nothing, but I have 1 Mars to eat at least!
-null: Thanks for this Mars number 1!
-null: I may have done nothing, but I have 1 Mars to eat at least!
-null: Thanks for this Mars number 1!
-null: Started a mission!
-null: Started a mission!
-     */
         if (mars instanceof planet.Mars){
             //cast
             planet.Mars Solaire = (planet.Mars) mars;
@@ -50,15 +40,18 @@ null: Started a mission!
             System.out.println(this.getName() + ": Started a mission!");
         }
         else if (mars instanceof chocolate.Mars){
+            chocolate.Mars barre = (chocolate.Mars) mars;
             snack ++;
-            System.out.println(this.getName() + ": Thanks for this Mars number " + snack + "!");
+            System.out.println(this.getName() + ": Thanks for this Mars number " + barre.getId() + "!");
         }
-        else{
-            System.out.println(this.getName() + ": Nothing to do.");
-        }
-        if (destination == null){
+        else if (destination == null){
             System.out.println(this.getName() + ": I may have done nothing, but I have " + snack + " Mars to eat at least!");
         }
+
+    }
+    public void doActions(){
+        System.out.println(this.getName() + ": Nothing to do.");
+
     }
     public String getName(){
         return name;
