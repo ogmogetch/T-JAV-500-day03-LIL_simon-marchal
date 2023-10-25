@@ -1,13 +1,12 @@
-package ex_01;
-
 public class Mars {
-    private static int counter = -1;
-    private int id;
-    public Mars () {
-        counter ++;
-        id = counter ;
+    private static int counter = 0;
+    private final int id;
+
+    public Mars() {
+        this.id = counter++;
     }
-    public int getId () {
-        return id ;
+
+    public int getId() {
+        return id;
     }
 }
