@@ -32,27 +32,37 @@ public Astronaut() {
         System.out.println(name + " ready for launch!");
 
     }
-    public void doActions(Object mars){
-        if (mars instanceof planet.Mars){
-            //cast
-            planet.Mars Solaire = (planet.Mars) mars;
-            destination = Solaire.getLandingSite();
-            System.out.println(this.getName() + ": Started a mission!");
+    public void doActions(Object mars) {
+        if(mars instanceof planet.Mars) {
+            // cast mars to planet.Mars
+            planet.Mars planetMars = (planet.Mars) mars;
+            this.destination = planetMars.getLandingSite();
+            System.out.println(this.name + ": Started a mission!");
         }
-        else if (mars instanceof chocolate.Mars){
-            chocolate.Mars barre = (chocolate.Mars) mars;
-            snack ++;
-            System.out.println(this.getName() + ": Thanks for this Mars number " + barre.getId() + "!");
-        }
-        else if (destination == null){
-            System.out.println(this.getName() + ": I may have done nothing, but I have " + snack + " Mars to eat at least!");
-        }
+        else if (mars instanceof chocolate.Mars) {
+            // cast mars to chocolate.Mars
+            chocolate.Mars chocolateMars = (chocolate.Mars) mars;
+            System.out.println(this.name + ": Thanks for this Mars number " + chocolateMars.getId());
+            if (this.destination == null) {
+                System.out.println(this.name + ": I may have done nothing, but I have " + this.snack + " Mars to eat at least!");
+            }
+            this.snack++;
 
+        } else if (mars instanceof planet.moon.Phobos) {
+            // cast mars to planet.moon.Phobos
+            planet.moon.Phobos phobos = (planet.moon.Phobos) mars;
+            this.destination = phobos.getLandingSite();
+            System.out.println(this.name + ": Started a mission!");
+        }
     }
-    public void doActions(){
-        System.out.println(this.getName() + ": Nothing to do.");
 
+    public void doActions() {
+        System.out.println(this.name + ": Nothing to do.");
+        if (this.destination == null) {
+            System.out.println(this.name + ": I may have done nothing, but I have " + this.snack + " Mars to eat at least!");
+        }
     }
+
     public String getName(){
         return name;
     }
