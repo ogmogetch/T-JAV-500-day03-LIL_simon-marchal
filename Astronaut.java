@@ -5,10 +5,7 @@ public class Astronaut {
     private static int counter = -1;
     private int id, snacks;
     private String destination, name;
-public Astronaut() {
-        counter ++;
-        id = counter ;
-    }
+
     public Astronaut(String name) {
         counter ++;
         id = counter ;
