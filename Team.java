@@ -1,104 +1,75 @@
+import java.util.ArrayList;
+
 public class Team {
-    /*
-    import planet .*;
-public class Example {
-public static void main ( String [] args ) {
-Astronaut mutta = new Astronaut ( " Mutta " ) ;
-Astronaut hibito = new Astronaut ( " Hibito " ) ;
-Astronaut serika = new Astronaut ( " Serika " ) ;
-Team spaceBro = new Team ( " SpaceBrothers " ) ;
-spaceBro . add ( mutta ) ;
-spaceBro . add ( hibito ) ;
-spaceBro . add ( serika ) ;
-System . out . println ( spaceBro . countMembers () ) ;
-planet . Mars titi = new planet . Mars ( " Hill " ) ;
-mutta . doActions ( titi ) ;
-spaceBro . showMembers () ;
-spaceBro . remove ( hibito ) ;
-System . out . println ( spaceBro . countMembers () ) ;
-}
-}
-     */
+
     private String name;
-    private Astronaut[] members;
-    private int count;
+    ArrayList<Astronaut> astronauts;
 
     public Team(String name) {
         this.name = name;
-        this.members = new Astronaut[10];
-        this.count = 0;
+        this.astronauts = new ArrayList<Astronaut>();
     }
 
-    public void add(Astronaut member) {
-        if (this.count < 10) {
-            this.members[this.count] = member;
-            this.count++;
-        }
+    public String getName() {
+        return this.name;
     }
 
-    public void remove(Astronaut member) {
-        int i = 0;
-        while (i < this.count) {
-            if (this.members[i] == member) {
-                this.members[i] = null;
-                while (i < this.count - 1) {
-                    this.members[i] = this.members[i + 1];
-                    i++;
-                }
-                this.count--;
-                break;
-            }
-            i++;
-        }
+    public void add(Astronaut astronaut) {
+        this.astronauts.add(astronaut);
+    }
+
+    public void remove(Astronaut astronaut) {
+        this.astronauts.remove(astronaut);
     }
 
     public int countMembers() {
-        return this.count;
+        return this.astronauts.size();
     }
 
     public void showMembers() {
-        String message = this.name + ": ";
-        int nb = this.count;
-        if (this.count == 0) {
-            message += "No member yet.";
-        } else {
-        for (int i = 0; i < this.count; i++) {
-            message += this.members[i].getName();
-                if (this.members[i].getDestination() != null) {
-                    message += " on mission";
-                    if (i < nb) {
-                        message += ", ";
-                        nb--;
-                    }
-                } else {
-                    message += " on standby";
-                    if (i < nb) {
-                        message += ", ";
-                        nb--;
-                    }
-                }
+
+        if (this.astronauts.isEmpty()) {
+            return;
+        }
+
+        StringBuilder members = new StringBuilder();
+        for (Astronaut astronaut : this.astronauts) {
+            if (astronaut.getDestination() != null) {
+                members.append(astronaut.getName() + " on mission, ");
+            } else {
+                members.append(astronaut.getName() + " on standby, ");
             }
         }
-        System.out.println(message+".");
+
+        System.out.println(this.name + ": " + members.substring(0, members.length() - 2) + '.');
+
     }
 
-    public void doActions(String name) {
-        /*
-        Add a new method to your Team, doActions.
-This method calls all of the Team’s Astronaut’s doActions with the received parameter.
-If no parameter is received, it displays [Team name]: Nothing to do.
-Display it only once.
-If chocolate.Mars is received as parameter, we will admit that the team share the chocolate
-but it still count as a full chocolate for each astronauts.
-Now that your Astronauts have more experience, they can also go on a mission to Phobos.
-You will need to modify your Astronaut class.
-         */
-        if (name == null) {
-            System.out.println(this.name + ": Nothing to do.");
-        } else {
-            for (int i = 0; i < this.count; i++) {
-                this.members[i].doActions(name);
+    public void doActions(Object mars) {
+        if (mars instanceof planet.Mars) {
+            // cast mars to planet.Mars
+            planet.Mars planetMars = (planet.Mars) mars;
+            for (Astronaut astronaut : this.astronauts) {
+                astronaut.doActions(planetMars);
+            }
+        } else if (mars instanceof chocolate.Mars) {
+            // cast mars to chocolate.Mars
+            chocolate.Mars chocolateMars = (chocolate.Mars) mars;
+            for (Astronaut astronaut : this.astronauts) {
+                astronaut.doActions(chocolateMars);
+            }
+        } else if (mars instanceof planet.moon.Phobos) {
+            // cast mars to planet.moon.Phobos
+            planet.moon.Phobos phobos = (planet.moon.Phobos) mars;
+            for (Astronaut astronaut : this.astronauts) {
+                astronaut.doActions(phobos);
             }
         }
+
+        }
+
+    public void doActions() {
+        System.out.println(this.name + ": Nothing to do.");
     }
+
 }

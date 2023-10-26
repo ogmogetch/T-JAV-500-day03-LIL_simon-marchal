@@ -1,26 +1,13 @@
 package planet;
 
 public class Mars {
-private static int counter = -1;
-    private int id;
-    private static String landingSite;
+    private final String landingSite;
 
-
-    public Mars(String name) {
-        counter ++;
-        id = counter ;
-        landingSite = name;
-
+    public Mars(String landingSite) {
+        this.landingSite = landingSite;
     }
 
-    public static String getLandingSite(){
+    public String getLandingSite() {
         return landingSite;
     }
-
-    public int getId () {
-        return id ;
-    }
-
-
-
 }

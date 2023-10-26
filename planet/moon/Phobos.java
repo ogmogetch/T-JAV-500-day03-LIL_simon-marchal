@@ -1,23 +1,28 @@
 package planet.moon;
 
+import planet.Mars;
+
 public class Phobos {
-    private planet.Mars mars;
-    private String landingSite;
+    private final Mars mars;
+    private final String landingSite;
 
-    public Phobos(planet.Mars mars, String landingSite){
-        this.mars = mars;
-        this.landingSite = landingSite;
-        if (mars == null)
-            System.out.println("No planet given.");
-        else
+    public Phobos(Mars mars, String landingSite) {
+        if (mars != null) {
+            this.mars = mars;
+            this.landingSite = landingSite;
             System.out.println("Phobos placed in orbit.");
+        } else {
+            this.mars = null;
+            this.landingSite = null;
+            System.out.println("No planet given.");
+        }
     }
 
-    public String getLandingSite(){
-        return landingSite;
-    }
-
-    public planet.Mars getMars(){
+    public Mars getMars() {
         return mars;
+    }
+
+    public String getLandingSite() {
+        return landingSite;
     }
 }
